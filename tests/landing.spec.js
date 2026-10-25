@@ -134,7 +134,12 @@ test('responsive layouts have no page overflow, text collisions or moving bottle
       await page.getByRole('button', { name: label, exact: true }).click();
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth);
       expect(overflow, `page overflow at ${width}px`).toBe(false);
-      const bottle = await page.locator('.bottle-current').boundingBox();
+      // Clicking a selector can scroll it into view. Compare page coordinates,
+      // so browser auto-scroll is not mistaken for a layout/baseline change.
+      const bottle = await page.locator('.bottle-current').evaluate((element) => {
+        const rect = element.getBoundingClientRect();
+        return { y: rect.y + scrollY, height: rect.height };
+      });
       baselines.push(bottle.y + bottle.height);
       const name = await page.locator('.wine-name').boundingBox();
       const next = await page.locator('.next-button').boundingBox();
@@ -145,7 +150,10 @@ test('responsive layouts have no page overflow, text collisions or moving bottle
         name.y + name.height > next.y;
       expect(overlaps, `wine name overlaps Next at ${width}px`).toBe(false);
     }
-    expect(Math.max(...baselines) - Math.min(...baselines)).toBeLessThan(0.1);
+    expect(
+      Math.max(...baselines) - Math.min(...baselines),
+      `document baseline at ${width}px`,
+    ).toBeLessThan(0.1);
   }
 });
 

@@ -20,5 +20,6 @@ The page is tested through its public browser interface, using the local static 
 
 - Windows: **9/9 Chromium and 9/9 WebKit checks passed**. Syntax and formatting checks passed. `pnpm audit --audit-level=high` reported no known vulnerabilities.
 - Firefox could not launch in this Windows environment (`spawn UNKNOWN`, before page creation). Installing its Playwright browser and retrying a single worker did not resolve the environment failure. This is not reported as a successful Firefox run.
-- GitHub Actions runs all 27 checks on Linux before publishing Pages. Its actual result is available in the repository's Actions tab.
+- Linux GitHub Actions: **27/27 checks passed** in Chromium, Firefox and WebKit, and Pages deployment succeeded. [Verified run](https://github.com/memorim/domaine-laffitte-wine-landing/actions/runs/40220738477), application/test commit `0a51105`.
+- The responsive baseline assertion uses document coordinates: Playwright's automatic scrolling to a selector must not be mistaken for a layout change. The tolerance remains 0.1px.
 - Desktop and mobile previews in this repository were captured from the real local page by `pnpm capture`; they are not generated illustrations.

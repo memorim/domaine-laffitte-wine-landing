@@ -101,3 +101,4 @@ The first wine and page content remain available without JavaScript; switching a
 - Original composition and wine/photo assets: the [user-supplied Figma project](https://www.figma.com/design/jJ4Elc8tU9uAWlCB61WZYU/). Brand names and artwork remain the property of their respective owners; no additional licence to those assets is granted here.
 - Cormorant Garamond and Manrope: self-hosted from [Google Fonts](https://github.com/google/fonts), under the SIL Open Font License; licence texts are included in `assets/fonts/`.
 - Implementation and interface refinements: Roman Kabanov ([memorim](https://github.com/memorim)).
+- Estate background and current external destination: the [producer's website](https://www.les-freres-laffitte.com/). No dates or visit availability are claimed by this interface.

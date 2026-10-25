@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f2ecde" />
+    <meta
+      name="description"
+      content="An editorial journey through the Domaine Laffitte wine collection. An independent interface project by Roman Kabanov."
+    />
+    <title>Domaine Laffitte — The French way of life</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="assets/fonts/cormorant-garamond-italic.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link rel="preload" href="assets/colombard-sauvignon.png" as="image" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" type="module"></script>
+  </head>
+  <body data-wine="white">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell" id="top">
+      <header class="header">
+        <a class="wordmark" href="#top" aria-label="Domaine Laffitte home">DL<span></span></a>
+        <nav class="navigation" id="navigation" aria-label="Main navigation">
+          <a href="#about">About us</a>
+          <a href="#wines">Wines</a>
+          <a href="#story">Our story</a>
+          <a href="#contact">Contacts</a>
+        </nav>
+        <span class="language" aria-label="Language: English">EN</span>
+        <button
+          class="menu-button"
+          type="button"
+          aria-label="Open navigation"
+          aria-expanded="false"
+          aria-controls="navigation"
+        >
+          <span></span><span></span>
+        </button>
+        <button
+          class="collection-button"
+          type="button"
+          aria-haspopup="dialog"
+          aria-controls="collection-dialog"
+        >
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M5 8h14l1 13H4L5 8Zm3 0V6a4 4 0 0 1 8 0v2" />
+          </svg>
+          <span class="collection-label">Your selection</span
+          ><span class="collection-count">0</span>
+        </button>
+      </header>
+
+      <main id="main">
+        <section
+          class="hero"
+          id="wines"
+          aria-label="Wine collection"
+          aria-roledescription="carousel"
+        >
+          <div class="hero-copy">
+            <p class="eyebrow">From Gascony, with character</p>
+            <h1>
+              Domaine Laffitte —<br />the French<br class="medium-break" />
+              way of life<span class="period">.</span>
+            </h1>
+            <p class="intro">
+              A place, a family, a certain art of living.<br />Discover three expressions of Domaine
+              Laffitte, brought together by the spirit of Gascony.
+            </p>
+            <a class="oval-button" href="#about"
+              >Explore the domaine <span aria-hidden="true">↗</span></a
+            >
+            <div class="hero-index" aria-hidden="true">
+              <span class="current-number">01</span><span class="index-line"></span><span>03</span>
+            </div>
+          </div>
+
+          <div class="wine-showcase" aria-label="Featured wine">
+            <span class="wine-caption">LA COLLECTION</span>
+            <div class="bottle-stage">
+              <div
+                class="bottle bottle-current"
+                style="
+                  --raster-height: 102.7701%;
+                  --raster-top: -0.9695%;
+                  --raster-left: -2.0513%;
+                  --raster-width: 111.7949%;
+                  --bottle-ratio: 195 / 722;
+                "
+              >
+                <img
+                  src="assets/colombard-sauvignon.png"
+                  width="218"
+                  height="742"
+                  alt="Domaine Laffitte Colombard Sauvignon wine bottle"
+                  fetchpriority="high"
+                  draggable="false"
+                />
+              </div>
+              <div class="bottle bottle-preview" aria-hidden="true"></div>
+              <div class="next-rail">
+                <button class="next-button circle-button" type="button" aria-label="Next wine">
+                  <span>Next</span
+                  ><svg aria-hidden="true" viewBox="0 0 32 12">
+                    <path d="M1 6h28m-5-5 5 5-5 5" />
+                  </svg>
+                </button>
+              </div>
+              <span class="bottle-shadow" aria-hidden="true"></span>
+            </div>
+            <div class="wine-information" aria-live="polite" aria-atomic="true">
+              <p class="wine-kind">01 / WHITE WINE</p>
+              <h2 class="wine-name">Colombard<br />&amp; Sauvignon</h2>
+              <div class="wine-bottom">
+                <span class="wine-price">€138</span
+                ><button
+                  class="add-button"
+                  type="button"
+                  aria-label="Add Colombard Sauvignon to your selection"
+                >
+                  <span aria-hidden="true">+</span>
+                </button>
+              </div>
+            </div>
+            <div class="wine-selectors" role="group" aria-label="Choose a wine">
+              <button
+                type="button"
+                class="wine-selector"
+                data-select="white"
+                aria-label="Show Colombard Sauvignon"
+                aria-pressed="true"
+              >
+                <span class="swatch white-swatch"></span><span>Blanc</span>
+              </button>
+              <button
+                type="button"
+                class="wine-selector"
+                data-select="red"
+                aria-label="Show Malbec"
+                aria-pressed="false"
+              >
+                <span class="swatch red-swatch"></span><span>Rouge</span>
+              </button>
+              <button
+                type="button"
+                class="wine-selector"
+                data-select="rose"
+                aria-label="Show Rosé"
+                aria-pressed="false"
+              >
+                <span class="swatch rose-swatch"></span><span>Rosé</span>
+              </button>
+            </div>
+          </div>
+
+          <a class="tasting-teaser" href="#tasting">
+            <img
+              src="assets/tasting.png"
+              width="744"
+              height="522"
+              alt="A glass and bottle of rosé in soft pink light"
+            />
+            <div>
+              <span class="eyebrow">A moment to savour</span>
+              <h2>Come to the wine-tasting</h2>
+              <p>Discover the collection, one glass at a time.</p>
+            </div>
+            <span class="teaser-arrow circle-button" aria-hidden="true">↗</span>
+          </a>
+        </section>
+
+        <section class="about-section section-padding" id="about">
+          <p class="eyebrow section-label">01 / The domaine</p>
+          <div>
+            <h2>Good wine.<br /><em>Better moments.</em></h2>
+            <p>
+              At the heart of this collection is a simple invitation: slow down, discover a new
+              favourite and make room for the everyday moments that matter.
+            </p>
+            <a class="text-link" href="#wines"
+              >Find your expression <span aria-hidden="true">↗</span></a
+            >
+          </div>
+          <div class="about-note">
+            <span class="small-monogram" aria-hidden="true">DL</span>
+            <p>Three wines.<br />Three personalities.<br />One French way of life.</p>
+          </div>
+        </section>
+
+        <section class="story-section section-padding" id="story">
+          <p class="eyebrow section-label">02 / Our story</p>
+          <div>
+            <h2>A sense of place.<br /><em>A spirit of discovery.</em></h2>
+            <p>
+              White, red or rosé: explore the bottles through their own colours and character. The
+              collection changes with a single gesture, while the essentials stay beautifully in
+              place.
+            </p>
+          </div>
+          <div class="story-numbers">
+            <span>03</span>
+            <p>expressions to explore</p>
+            <a class="text-link" href="#wines"
+              >Back to the collection <span aria-hidden="true">↑</span></a
+            >
+          </div>
+        </section>
+
+        <section class="tasting-section" id="tasting">
+          <img
+            src="assets/tasting.png"
+            width="744"
+            height="522"
+            alt="Rosé wine and a sculptural glass, photographed in warm light"
+            loading="lazy"
+          />
+          <div>
+            <p class="eyebrow">03 / The experience</p>
+            <h2>A little less hurry.<br /><em>A little more discovery.</em></h2>
+            <p>
+              Get to know the wines, discover the estate and enquire about visits directly with the
+              producer.
+            </p>
+            <a
+              class="oval-button"
+              href="https://www.lesfrereslaffitte.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Discover the producer <span aria-hidden="true">↗</span></a
+            >
+          </div>
+        </section>
+      </main>
+      <footer class="footer" id="contact">
+        <a class="footer-brand" href="#top">Domaine Laffitte</a>
+        <p>
+          An independent digital interpretation<br />by
+          <a href="https://github.com/memorim" target="_blank" rel="noopener noreferrer"
+            >Roman Kabanov</a
+          >
+        </p>
+        <a
+          class="text-link"
+          href="https://www.lesfrereslaffitte.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Visit the producer <span aria-hidden="true">↗</span></a
+        ><a class="back-top" href="#top" aria-label="Back to top">↑</a>
+      </footer>
+    </div>
+
+    <dialog class="collection-dialog" id="collection-dialog" aria-labelledby="collection-heading">
+      <div class="dialog-header">
+        <p class="eyebrow">Your collection</p>
+        <button class="close-dialog circle-button" type="button" aria-label="Close selection">
+          ×
+        </button>
+      </div>
+      <h2 id="collection-heading">A matter of <em>taste.</em></h2>
+      <p class="collection-empty">
+        Your selection is waiting to be discovered.<br />Add a bottle from the collection.
+      </p>
+      <ul class="collection-items"></ul>
+      <div class="collection-summary" hidden>
+        <span>Total</span><strong class="collection-total">€0</strong>
+      </div>
+      <p class="collection-note">Saved on this device. No order or payment is placed.</p>
+      <button class="continue-button" type="button">
+        Continue exploring <span aria-hidden="true">↗</span>
+      </button>
+    </dialog>
+    <div class="toast" role="status" aria-live="polite"></div>
+    <noscript
+      ><p class="noscript-note">
+        The first wine and all information remain available. Enable JavaScript to switch wines and
+        save your selection.
+      </p></noscript
+    >
+  </body>
+</html>

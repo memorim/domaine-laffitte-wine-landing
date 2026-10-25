@@ -1,0 +1,1352 @@
+@font-face {
+  font-family: Cormorant;
+  src: url('assets/fonts/cormorant-garamond.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: Cormorant;
+  src: url('assets/fonts/cormorant-garamond-italic.ttf') format('truetype');
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: Manrope;
+  src: url('assets/fonts/manrope.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+}
+:root {
+  --paper: #f2ecde;
+  --ink: #292820;
+  --line: rgba(41, 40, 32, 0.28);
+  --muted: #68665b;
+  --glow: #b8b478;
+  --accent: #ddd7ae;
+  --serif: Cormorant, Georgia, serif;
+  --sans: Manrope, Arial, sans-serif;
+  scroll-behavior: smooth;
+  scroll-padding-top: 24px;
+  color-scheme: light;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  transition: background-color 0.55s ease;
+}
+body[data-wine='red'] {
+  --paper: #d3d2cc;
+  --glow: #838477;
+  --accent: #b3b2a8;
+}
+body[data-wine='rose'] {
+  --paper: #e9d9d3;
+  --glow: #c5927d;
+  --accent: #d6b2a2;
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+button,
+input {
+  font: inherit;
+}
+button {
+  color: inherit;
+  cursor: pointer;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  background: none;
+  border: 0;
+}
+button:disabled {
+  cursor: default;
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 6px;
+}
+button:focus:not(:focus-visible) {
+  outline: none;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+h1,
+h2,
+p {
+  margin: 0;
+}
+em {
+  font-weight: 400;
+}
+::selection {
+  background: #6e7260;
+  color: #fff;
+}
+.site-shell {
+  max-width: 1920px;
+  margin: auto;
+  border-inline: 1px solid var(--line);
+}
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 16px;
+  z-index: 20;
+  padding: 12px 18px;
+  background: var(--ink);
+  color: white;
+  transform: translateY(-150%);
+}
+.skip-link:focus {
+  transform: none;
+}
+.header {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  height: 100px;
+}
+.wordmark {
+  font-family: var(--serif);
+  font-size: 44px;
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: -7px;
+  width: 104px;
+  height: 100%;
+  border-right: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 7px;
+}
+.wordmark span {
+  height: 1px;
+  width: 21px;
+  background: currentColor;
+  transform: rotate(18deg) translate(-18px, 19px);
+}
+.navigation {
+  display: flex;
+  gap: clamp(24px, 3.1vw, 60px);
+  margin-left: auto;
+  margin-right: 5%;
+  font-size: 12px;
+  font-weight: 500;
+}
+.navigation a {
+  padding-block: 14px;
+  position: relative;
+}
+.navigation a::after,
+.text-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 8px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s;
+}
+.navigation a:hover::after {
+  transform: scaleX(1);
+}
+.language {
+  font-size: 11px;
+  display: flex;
+  gap: 14px;
+  border-left: 1px solid var(--line);
+  height: 100%;
+  align-items: center;
+  padding: 0 28px;
+}
+.menu-button {
+  width: 72px;
+  height: 100%;
+  display: none;
+  place-content: center;
+  gap: 6px;
+}
+.menu-button span {
+  width: 22px;
+  height: 1px;
+  background: currentColor;
+  transition: transform 0.2s;
+}
+.menu-button[aria-expanded='true'] span:first-child {
+  transform: translateY(3.5px) rotate(45deg);
+}
+.menu-button[aria-expanded='true'] span:last-child {
+  transform: translateY(-3.5px) rotate(-45deg);
+}
+.collection-button {
+  border-left: 1px solid var(--line);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0 32px;
+  font-size: 11px;
+}
+.collection-button svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.3;
+}
+.collection-count {
+  border: 1px solid var(--line);
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  font-size: 10px;
+}
+.hero {
+  display: grid;
+  grid-template-columns: 58% 42%;
+  grid-template-rows: 1fr auto;
+  min-height: 790px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-copy {
+  padding: 70px 7.7% 48px;
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero-copy::before {
+  content: '';
+  position: absolute;
+  width: 60%;
+  aspect-ratio: 1;
+  left: 6%;
+  top: 10%;
+  background: radial-gradient(ellipse, var(--glow), transparent 68%);
+  filter: blur(35px);
+  opacity: 0.52;
+  z-index: -1;
+  pointer-events: none;
+  transition: background 0.5s;
+}
+.eyebrow {
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.hero-copy > .eyebrow {
+  margin-bottom: 26px;
+}
+.hero h1 {
+  font: italic 500 clamp(58px, 6vw, 106px)/0.99 var(--serif);
+  letter-spacing: -0.047em;
+  margin-left: -4px;
+  max-width: 100%;
+}
+.medium-break {
+  display: none;
+}
+.period {
+  color: #72704c;
+}
+.intro {
+  font-size: 13px;
+  line-height: 1.9;
+  max-width: 370px;
+  margin: 30px 0 29px;
+  color: var(--muted);
+}
+.oval-button {
+  position: relative;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  padding: 17px 28px;
+  font-size: 11px;
+  min-width: 205px;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  transition:
+    color 0.2s,
+    background 0.2s;
+}
+.oval-button::after {
+  content: '';
+  position: absolute;
+  inset: 3px -3px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  transform: rotate(-5deg);
+  pointer-events: none;
+}
+.oval-button:hover,
+.oval-button:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+}
+.hero-index {
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  margin-top: 48px;
+}
+.hero-index > .current-number {
+  font-weight: 700;
+}
+.index-line {
+  width: 95px;
+  height: 1px;
+  background: var(--line);
+  position: relative;
+}
+.index-line::before {
+  content: '';
+  height: 1px;
+  width: 33.333%;
+  background: var(--ink);
+  position: absolute;
+  left: var(--index-offset, 0);
+  transition: left 0.3s;
+}
+.wine-showcase {
+  border-left: 1px solid var(--line);
+  grid-column: 2;
+  grid-row: 1/3;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 32px 0 24px;
+}
+.wine-caption {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  position: absolute;
+  top: 34px;
+  left: 30px;
+  writing-mode: vertical-rl;
+}
+.bottle-stage {
+  height: 500px;
+  position: relative;
+  flex: 1;
+  min-height: 400px;
+  margin: 42px 0 0;
+}
+.bottle {
+  height: calc(100% - 18px);
+  aspect-ratio: var(--bottle-ratio);
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+.bottle img {
+  position: absolute;
+  max-width: none;
+  width: var(--raster-width);
+  height: var(--raster-height);
+  top: var(--raster-top);
+  left: var(--raster-left);
+  object-fit: fill;
+  user-select: none;
+}
+.bottle-current {
+  left: 34%;
+  transform: translateX(-50%);
+  z-index: 1;
+  filter: drop-shadow(8px 12px 7px rgba(42, 34, 23, 0.1));
+}
+.bottle-preview {
+  left: 95%;
+  opacity: 0.58;
+  pointer-events: none;
+}
+.bottle-current.changing {
+  animation: bottle-arrive 0.45s ease both;
+}
+@keyframes bottle-arrive {
+  from {
+    opacity: 0.25;
+    transform: translateX(calc(-50% + 25px));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%);
+  }
+}
+.next-rail {
+  position: absolute;
+  right: 21%;
+  top: -74px;
+  bottom: -12px;
+  width: 1px;
+  background: var(--line);
+}
+.circle-button {
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.next-button {
+  position: absolute;
+  top: 108px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 110px;
+  height: 110px;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+  z-index: 3;
+  font: italic 400 21px var(--serif);
+}
+.next-button > * {
+  pointer-events: none;
+}
+.next-button svg {
+  width: 27px;
+  height: 10px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+}
+.next-button:hover,
+.next-button:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+}
+.next-button:active {
+  background: #515044;
+}
+.bottle-shadow {
+  position: absolute;
+  bottom: 8px;
+  left: 34%;
+  transform: translateX(-50%);
+  width: 30%;
+  height: 15px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(29, 27, 17, 0.15), transparent 70%);
+  filter: blur(4px);
+}
+.wine-information {
+  margin: 23px 34% 0 8%;
+  min-height: 143px;
+}
+.wine-kind {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  margin-bottom: 11px;
+  color: var(--muted);
+}
+.wine-name {
+  font: 500 clamp(29px, 2.8vw, 45px)/0.95 var(--serif);
+  letter-spacing: -0.025em;
+  min-height: 2em;
+}
+.wine-bottom {
+  border-top: 1px solid var(--line);
+  margin-top: 16px;
+  padding-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wine-price {
+  font: 400 22px var(--serif);
+}
+.add-button {
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-content: center;
+  font: 300 24px var(--sans);
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.add-button:hover,
+.add-button:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+}
+.wine-selectors {
+  display: flex;
+  margin: 24px 0 0 8%;
+  gap: 22px;
+}
+.wine-selector {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  font-size: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid transparent;
+}
+.wine-selector[aria-pressed='true'] {
+  border-bottom-color: var(--ink);
+}
+.swatch {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: block;
+  border: 1px solid rgba(41, 40, 32, 0.3);
+}
+.white-swatch {
+  background: #a7a45e;
+}
+.red-swatch {
+  background: #403735;
+}
+.rose-swatch {
+  background: #c28776;
+}
+.tasting-teaser {
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  border-top: 1px solid var(--line);
+  padding: 24px 5%;
+  min-height: 151px;
+}
+.tasting-teaser > img {
+  width: 116px;
+  height: 84px;
+  object-fit: cover;
+}
+.tasting-teaser .eyebrow {
+  font-size: 8px;
+}
+.tasting-teaser h2 {
+  font: 500 26px/1.1 var(--serif);
+  margin: 5px 0 8px;
+}
+.tasting-teaser p {
+  font-size: 10px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.teaser-arrow {
+  width: 65px;
+  height: 65px;
+  flex-shrink: 0;
+  font-size: 22px;
+  font-family: var(--serif);
+  margin-left: auto;
+  transform: rotate(-15deg);
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.tasting-teaser:hover .teaser-arrow {
+  background: var(--ink);
+  color: var(--paper);
+}
+.section-padding {
+  padding: 95px 5%;
+}
+.about-section,
+.story-section {
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 22% 1fr 25%;
+  gap: 4%;
+}
+.section-label {
+  padding-top: 10px;
+  color: var(--muted);
+}
+.about-section h2,
+.story-section h2,
+.tasting-section h2 {
+  font: 500 clamp(42px, 4vw, 65px)/1 var(--serif);
+  letter-spacing: -0.03em;
+}
+.about-section p:not(.eyebrow),
+.story-section p:not(.eyebrow),
+.tasting-section p:not(.eyebrow) {
+  font-size: 12px;
+  line-height: 1.9;
+  color: var(--muted);
+  max-width: 400px;
+  margin-top: 25px;
+}
+.text-link {
+  display: inline-flex;
+  gap: 25px;
+  align-items: center;
+  font-size: 10px;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 8px;
+  margin-top: 28px;
+  position: relative;
+}
+.text-link:hover {
+  opacity: 0.65;
+}
+.about-note {
+  border-left: 1px solid var(--line);
+  padding-left: 20%;
+  align-self: center;
+}
+.small-monogram {
+  font: italic 500 55px var(--serif);
+  letter-spacing: -7px;
+}
+.about-note p {
+  font-family: var(--serif);
+  font-size: 20px !important;
+  line-height: 1.35 !important;
+}
+.story-section {
+  background: rgba(255, 255, 255, 0.16);
+}
+.story-numbers {
+  padding-left: 20%;
+  border-left: 1px solid var(--line);
+  align-self: center;
+}
+.story-numbers > span {
+  font: italic 400 100px/0.8 var(--serif);
+  letter-spacing: -0.06em;
+}
+.story-numbers p {
+  font-size: 10px !important;
+  margin-top: 18px !important;
+}
+.tasting-section {
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.tasting-section > img {
+  width: 100%;
+  height: 100%;
+  max-height: 570px;
+  object-fit: cover;
+}
+.tasting-section > div {
+  padding: 75px 12%;
+}
+.tasting-section .eyebrow {
+  margin-bottom: 26px;
+}
+.tasting-section .oval-button {
+  margin-top: 30px;
+  font-size: 10px;
+}
+.footer {
+  border-top: 1px solid var(--line);
+  padding: 36px 5%;
+  display: flex;
+  align-items: center;
+  gap: 7%;
+}
+.footer-brand {
+  font: italic 500 28px var(--serif);
+  letter-spacing: -0.03em;
+}
+.footer p {
+  font-size: 9px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.footer p a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.footer .text-link {
+  margin-top: 0;
+  margin-left: auto;
+}
+.back-top {
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-content: center;
+  font-size: 16px;
+}
+.collection-dialog {
+  margin: 0 0 0 auto;
+  width: min(490px, 100%);
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  border: 0;
+  border-left: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  padding: 28px 32px;
+}
+.collection-dialog::backdrop {
+  background: rgba(28, 25, 21, 0.42);
+  backdrop-filter: blur(4px);
+}
+.dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 48px;
+}
+.close-dialog {
+  width: 42px;
+  height: 42px;
+  font-size: 24px;
+}
+.collection-dialog h2 {
+  font: 500 52px/1 var(--serif);
+  letter-spacing: -0.04em;
+  margin-bottom: 32px;
+}
+.collection-empty {
+  font-size: 12px;
+  line-height: 1.9;
+  padding: 30px 0;
+  color: var(--muted);
+}
+.collection-items {
+  padding: 0;
+  list-style: none;
+}
+.collection-items li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+}
+.collection-items h3 {
+  font: 500 25px/1.1 var(--serif);
+  margin: 0 0 8px;
+}
+.collection-items p {
+  font-size: 11px;
+}
+.remove-item {
+  font-size: 10px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 10px;
+}
+.collection-summary {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 25px;
+  font-size: 12px;
+}
+.collection-summary[hidden] {
+  display: none;
+}
+.collection-total {
+  font: 500 27px var(--serif);
+}
+.collection-note {
+  font-size: 10px;
+  line-height: 1.8;
+  color: var(--muted);
+  margin-top: 26px;
+}
+.continue-button {
+  border: 1px solid var(--ink);
+  padding: 17px 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 28px;
+  font-size: 11px;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.continue-button:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+body:has(dialog[open]) {
+  overflow: hidden;
+}
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translate(-50%, 20px);
+  opacity: 0;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 14px 22px;
+  font-size: 11px;
+  pointer-events: none;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+  z-index: 10;
+  text-align: center;
+  max-width: calc(100% - 32px);
+  width: max-content;
+}
+.toast.visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.noscript-note {
+  padding: 16px;
+  font-size: 12px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+}
+@media (min-width: 1600px) {
+  .hero {
+    min-height: 940px;
+  }
+  .hero-copy {
+    padding-top: 110px;
+  }
+  .bottle-stage {
+    min-height: 530px;
+  }
+  .bottle-current {
+    left: 36%;
+  }
+  .bottle-shadow {
+    left: 36%;
+  }
+  .intro {
+    font-size: 15px;
+    max-width: 410px;
+  }
+  .tasting-teaser h2 {
+    font-size: 32px;
+  }
+  .tasting-teaser p {
+    font-size: 12px;
+  }
+  .wine-information {
+    margin-bottom: 10px;
+  }
+  .next-button {
+    width: 130px;
+    height: 130px;
+  }
+}
+@media (max-width: 1199px) {
+  .header {
+    height: 84px;
+  }
+  .wordmark {
+    width: 85px;
+  }
+  .navigation {
+    gap: 24px;
+    margin-right: 32px;
+    font-size: 11px;
+  }
+  .collection-label {
+    display: none;
+  }
+  .collection-button {
+    padding: 0 24px;
+  }
+  .language {
+    padding: 0 18px;
+  }
+  .menu-button {
+    width: 55px;
+  }
+  .hero {
+    min-height: 735px;
+  }
+  .hero-copy {
+    padding: 55px 8% 35px;
+  }
+  .hero h1 {
+    font-size: clamp(52px, 6vw, 74px);
+  }
+  .medium-break {
+    display: block;
+  }
+  .intro {
+    font-size: 12px;
+    max-width: 300px;
+  }
+  .next-button {
+    width: 85px;
+    height: 85px;
+    font-size: 18px;
+  }
+  .next-rail {
+    right: 18%;
+  }
+  .wine-information {
+    margin-right: 23%;
+  }
+  .bottle-current {
+    left: 39%;
+  }
+  .bottle-stage {
+    min-height: 370px;
+    max-height: 435px;
+  }
+  .bottle-shadow {
+    left: 39%;
+  }
+  .wine-name {
+    font-size: 34px;
+  }
+  .wine-selectors {
+    gap: 15px;
+  }
+  .tasting-teaser {
+    gap: 16px;
+    padding: 24px 6%;
+  }
+  .tasting-teaser > img {
+    width: 85px;
+    height: 76px;
+  }
+  .tasting-teaser h2 {
+    font-size: 23px;
+  }
+  .tasting-teaser p {
+    font-size: 9px;
+  }
+  .teaser-arrow {
+    width: 49px;
+    height: 49px;
+  }
+  .about-section,
+  .story-section {
+    grid-template-columns: 16% 1fr 22%;
+    gap: 5%;
+  }
+  .section-padding {
+    padding-block: 70px;
+  }
+  .tasting-section > div {
+    padding: 60px 10%;
+  }
+  .tasting-section h2 {
+    font-size: 45px;
+  }
+}
+@media (max-width: 767px) {
+  .site-shell {
+    border: 0;
+  }
+  .header {
+    height: 75px;
+    position: relative;
+    z-index: 5;
+  }
+  .wordmark {
+    width: 79px;
+    font-size: 36px;
+  }
+  .language {
+    margin-left: auto;
+    border-left: 0;
+    font-size: 10px;
+    padding: 0 14px;
+  }
+  .menu-button {
+    width: 55px;
+    border-left: 1px solid var(--line);
+    display: grid;
+  }
+  .collection-button {
+    padding: 0 20px;
+  }
+  .navigation {
+    display: none;
+    position: absolute;
+    top: 74px;
+    left: 0;
+    right: 0;
+    background: var(--paper);
+    margin: 0;
+    padding: 22px 24px;
+    border-bottom: 1px solid var(--line);
+    flex-direction: column;
+    gap: 0;
+    box-shadow: 0 18px 25px rgba(29, 27, 17, 0.06);
+  }
+  .navigation.open {
+    display: flex;
+  }
+  .navigation a {
+    font: 500 26px var(--serif);
+    padding: 12px 0;
+  }
+  .hero {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    min-height: 0;
+  }
+  .hero-copy {
+    padding: 42px 24px 34px;
+  }
+  .hero-copy > .eyebrow {
+    font-size: 8px;
+    margin-bottom: 22px;
+  }
+  .hero h1 {
+    font-size: clamp(49px, 9.7vw, 74px);
+    line-height: 0.97;
+    letter-spacing: -0.045em;
+    margin-left: -2px;
+  }
+  .medium-break {
+    display: none;
+  }
+  .intro {
+    font-size: 11px;
+    line-height: 1.9;
+    margin: 22px 0;
+    max-width: 330px;
+  }
+  .intro br {
+    display: none;
+  }
+  .oval-button {
+    font-size: 10px;
+    padding: 13px 22px;
+    min-width: 190px;
+  }
+  .hero-index {
+    position: absolute;
+    right: 24px;
+    bottom: 47px;
+    margin: 0;
+    font-size: 9px;
+    gap: 9px;
+  }
+  .index-line {
+    width: 44px;
+  }
+  .wine-showcase {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    grid-column: 1;
+    grid-row: 2;
+    padding: 25px 24px 21px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 18px;
+    overflow: hidden;
+  }
+  .wine-caption {
+    top: 28px;
+    left: 24px;
+    font-size: 8px;
+    letter-spacing: 0.15em;
+  }
+  .bottle-stage {
+    grid-column: 1;
+    grid-row: 1/3;
+    height: 360px;
+    min-height: 0;
+    max-height: none;
+    margin: 25px 0 0;
+  }
+  .bottle {
+    height: calc(100% - 18px);
+  }
+  .bottle-current {
+    left: 50%;
+  }
+  .bottle-preview {
+    display: none;
+  }
+  .bottle-shadow {
+    left: 50%;
+    width: 65%;
+  }
+  .next-rail {
+    left: auto;
+    right: -22px;
+    top: -25px;
+    bottom: auto;
+    height: 85px;
+  }
+  .next-button {
+    top: 62px;
+    width: 73px;
+    height: 73px;
+    gap: 6px;
+    font-size: 17px;
+  }
+  .next-button svg {
+    width: 23px;
+  }
+  .wine-information {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 172px 0 0;
+    min-height: 0;
+    align-self: start;
+  }
+  .wine-kind {
+    font-size: 8px;
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+  }
+  .wine-name {
+    font-size: 34px;
+    line-height: 0.96;
+    min-height: 2em;
+    letter-spacing: -0.04em;
+  }
+  .wine-bottom {
+    margin-top: 13px;
+    padding-top: 10px;
+  }
+  .wine-price {
+    font-size: 23px;
+  }
+  .add-button {
+    width: 37px;
+    height: 37px;
+    font-size: 21px;
+  }
+  .wine-selectors {
+    grid-column: 1/3;
+    grid-row: 3;
+    margin: 15px 0 0;
+    justify-content: center;
+    gap: 32px;
+    border-top: 1px solid var(--line);
+    padding-top: 7px;
+  }
+  .wine-selector {
+    font-size: 10px;
+    padding: 12px 0;
+  }
+  .tasting-teaser {
+    grid-column: 1;
+    grid-row: 3;
+    padding: 23px 24px;
+    min-height: 128px;
+    gap: 15px;
+  }
+  .tasting-teaser > img {
+    width: 70px;
+    height: 76px;
+  }
+  .tasting-teaser .eyebrow {
+    font-size: 7px;
+  }
+  .tasting-teaser h2 {
+    font-size: 22px;
+    max-width: 150px;
+    margin: 5px 0;
+  }
+  .tasting-teaser p {
+    font-size: 8px;
+    max-width: 145px;
+  }
+  .teaser-arrow {
+    width: 43px;
+    height: 43px;
+    font-size: 19px;
+  }
+  .section-padding {
+    padding: 48px 24px;
+  }
+  .about-section,
+  .story-section {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .section-label {
+    padding-top: 0;
+    font-size: 8px;
+  }
+  .about-section h2,
+  .story-section h2,
+  .tasting-section h2 {
+    font-size: 43px;
+  }
+  .about-section p:not(.eyebrow),
+  .story-section p:not(.eyebrow),
+  .tasting-section p:not(.eyebrow) {
+    font-size: 11px;
+    margin-top: 19px;
+  }
+  .about-note {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding: 25px 0 0;
+  }
+  .about-note p {
+    margin-top: 0 !important;
+    font-size: 18px !important;
+  }
+  .small-monogram {
+    font-size: 48px;
+  }
+  .story-numbers {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding: 30px 0 0;
+    flex-wrap: wrap;
+  }
+  .story-numbers > span {
+    font-size: 65px;
+  }
+  .story-numbers p {
+    margin: 0 !important;
+  }
+  .story-numbers .text-link {
+    margin: 0 0 0 auto;
+    gap: 10px;
+    font-size: 8px;
+  }
+  .tasting-section {
+    grid-template-columns: 1fr;
+  }
+  .tasting-section > img {
+    height: 260px;
+  }
+  .tasting-section > div {
+    padding: 45px 24px 50px;
+  }
+  .tasting-section .eyebrow {
+    font-size: 8px;
+    margin-bottom: 22px;
+  }
+  .footer {
+    padding: 30px 24px;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+  .footer-brand {
+    font-size: 25px;
+    flex-basis: calc(100% - 60px);
+  }
+  .footer p {
+    font-size: 8px;
+    order: 3;
+    flex: 1;
+  }
+  .footer .text-link {
+    font-size: 9px;
+    margin: 0;
+    order: 4;
+    gap: 12px;
+  }
+  .back-top {
+    order: 2;
+    margin-left: auto;
+  }
+  .collection-dialog {
+    padding: 24px;
+  }
+  .collection-dialog h2 {
+    font-size: 46px;
+  }
+  .dialog-header {
+    margin-bottom: 40px;
+  }
+}
+@media (max-width: 360px) {
+  .hero-copy {
+    padding-inline: 19px;
+  }
+  .hero-index {
+    right: 19px;
+  }
+  .hero h1 {
+    font-size: 45px;
+  }
+  .wine-showcase {
+    padding-inline: 19px;
+    column-gap: 12px;
+  }
+  .wine-name {
+    font-size: 30px;
+  }
+  .bottle-stage {
+    height: 320px;
+  }
+  .wine-information {
+    margin-top: 152px;
+  }
+  .next-button {
+    width: 66px;
+    height: 66px;
+  }
+  .tasting-teaser {
+    padding-inline: 19px;
+    gap: 12px;
+  }
+  .tasting-teaser h2 {
+    font-size: 20px;
+  }
+  .collection-button {
+    padding-inline: 15px;
+  }
+  .language {
+    padding-inline: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

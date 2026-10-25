@@ -1,0 +1,6 @@
+pnpm-lock.yaml
+assets/
+docs/*.png
+docs/*.gif
+playwright-report/
+test-results/

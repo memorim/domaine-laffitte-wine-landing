@@ -145,7 +145,7 @@ em {
 }
 .navigation {
   display: flex;
-  gap: clamp(24px, 3.1vw, 60px);
+  gap: clamp(24px, calc(3.1vw / var(--page-zoom, 1)), 60px);
   margin-left: auto;
   margin-right: 5%;
   font-size: 12px;
@@ -266,7 +266,7 @@ em {
   margin-bottom: 26px;
 }
 .hero h1 {
-  font: italic 500 clamp(58px, 6vw, 106px)/0.99 var(--serif);
+  font: italic 500 clamp(58px, calc(6vw / var(--page-zoom, 1)), 106px)/0.99 var(--serif);
   letter-spacing: -0.047em;
   margin-left: -4px;
   max-width: 100%;
@@ -479,7 +479,7 @@ em {
   color: var(--muted);
 }
 .wine-name {
-  font: 500 clamp(29px, 2.8vw, 45px)/0.95 var(--serif);
+  font: 500 clamp(29px, calc(2.8vw / var(--page-zoom, 1)), 45px)/0.95 var(--serif);
   letter-spacing: -0.025em;
   min-height: 2em;
 }
@@ -602,7 +602,7 @@ em {
 .about-section h2,
 .story-section h2,
 .tasting-section h2 {
-  font: 500 clamp(42px, 4vw, 65px)/1 var(--serif);
+  font: 500 clamp(42px, calc(4vw / var(--page-zoom, 1)), 65px)/1 var(--serif);
   letter-spacing: -0.03em;
 }
 .about-section p:not(.eyebrow),
@@ -839,7 +839,7 @@ body:has(dialog[open]) {
   text-align: center;
   border-top: 1px solid var(--line);
 }
-@media (min-width: 1600px) {
+@media (min-width: 801px) and (min-width: 2000px) {
   .hero {
     min-height: 940px;
   }
@@ -873,7 +873,7 @@ body:has(dialog[open]) {
     height: 130px;
   }
 }
-@media (max-width: 1199px) {
+@media (max-width: 1199px) and (max-width: 800px), (min-width: 801px) and (max-width: 1498.75px) {
   .header {
     height: 84px;
   }
@@ -904,7 +904,7 @@ body:has(dialog[open]) {
     padding: 55px 8% 35px;
   }
   .hero h1 {
-    font-size: clamp(52px, 6vw, 74px);
+    font-size: clamp(52px, calc(6vw / var(--page-zoom, 1)), 74px);
   }
   .medium-break {
     display: block;
@@ -973,7 +973,7 @@ body:has(dialog[open]) {
     font-size: 45px;
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 767px), (min-width: 801px) and (max-width: 958.75px) {
   .site-shell {
     border: 0;
   }
@@ -1034,7 +1034,7 @@ body:has(dialog[open]) {
     margin-bottom: 22px;
   }
   .hero h1 {
-    font-size: clamp(49px, 9.7vw, 74px);
+    font-size: clamp(49px, calc(9.7vw / var(--page-zoom, 1)), 74px);
     line-height: 0.97;
     letter-spacing: -0.045em;
     margin-left: -2px;
@@ -1348,5 +1348,13 @@ body:has(dialog[open]) {
   *::after {
     animation: none !important;
     transition: none !important;
+  }
+}
+
+/* Whole-page desktop zoom; viewport units and breakpoints use the same effective size. */
+@media screen and (min-width: 801px) {
+  html {
+    --page-zoom: 1.25;
+    zoom: var(--page-zoom);
   }
 }

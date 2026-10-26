@@ -1,64 +1,64 @@
-# Domaine Laffitte — Wine Landing
+# Domaine Laffitte — лендинг винной коллекции
 
-A responsive editorial landing page built from an existing Figma concept. Three wine states share one carousel, with calibrated bottle geometry and a fully interactive circular Next button.
+Адаптивный лендинг по концепции Figma: три вина в одной карусели, согласованные размеры бутылок и круглая кнопка переключения.
 
-[Live website](https://memorim.github.io/domaine-laffitte-wine-landing/) · [Original Figma](https://www.figma.com/design/jJ4Elc8tU9uAWlCB61WZYU/) · [Checks](https://github.com/memorim/domaine-laffitte-wine-landing/actions)
+[Открыть сайт](https://memorim.github.io/domaine-laffitte-wine-landing/) · [Макет Figma](https://www.figma.com/design/jJ4Elc8tU9uAWlCB61WZYU/) · [Проверки CI](https://github.com/memorim/domaine-laffitte-wine-landing/actions)
 
-![Desktop: the white wine collection](docs/desktop.png)
+![Компьютерная версия — белое вино](docs/desktop.png)
 
-## What works
+## Возможности
 
-- Three wine states: Colombard Sauvignon, Malbec and Rosé, with coordinated colours, labels, prices and next-bottle previews.
-- Consistent **visible bottle height and baseline**, including the preview bottle. No stretching to a common width.
-- Full circular hover/focus treatment. The adjacent decorative rail never acts as a button.
-- Direct wine selection, keyboard arrows, Home/End and rapid consecutive switching.
-- A local collection with quantities, totals, removal and persistence; malformed or blocked browser storage is handled.
-- Mobile navigation, real section links, a native modal dialog, focus restoration, live announcements and reduced-motion support.
-- Desktop and mobile layouts from 320px upward. Images and fonts are served locally.
+- Colombard Sauvignon, Malbec и Rosé: цвета, подписи, цены и превью следующей бутылки меняются вместе.
+- Одинаковая видимая высота и базовая линия бутылок без растягивания по ширине.
+- Полная круглая область наведения и фокуса; декоративная линия не перехватывает нажатия.
+- Выбор вина напрямую, стрелки клавиатуры, Home/End и быстрые последовательные переключения.
+- Локальная коллекция с количеством, суммой, удалением и сохранением; ошибки и недоступность хранилища обрабатываются.
+- Мобильное меню, ссылки разделов, нативный диалог, возврат фокуса и режим уменьшенной анимации.
+- Адаптация от 320 px. Фотографии бутылок, изображение дегустации и шрифты размещены локально.
 
-| Desktop: Malbec                 | Desktop: Rosé                  |
-| ------------------------------- | ------------------------------ |
-| ![Malbec](docs/desktop-red.png) | ![Rosé](docs/desktop-rose.png) |
+| Malbec                                | Rosé                                   |
+| ------------------------------------- | -------------------------------------- |
+| ![Красное вино](docs/desktop-red.png) | ![Розовое вино](docs/desktop-rose.png) |
 
-| Mobile                            | Selection                                      |
-| --------------------------------- | ---------------------------------------------- |
-| ![Mobile layout](docs/mobile.png) | ![Mobile selection](docs/selection-mobile.png) |
+| Мобильная версия                    | Выбранная коллекция                     |
+| ----------------------------------- | --------------------------------------- |
+| ![Мобильный экран](docs/mobile.png) | ![Коллекция](docs/selection-mobile.png) |
 
-## The two original problems
+## Ключевые решения
 
-### Bottle size
+### Геометрия бутылок
 
-Equal image rectangles did not mean equal bottle sizes. The exported 218 × 742 PNGs have different transparent bounds:
+У PNG одинаковый холст 218 × 742 px, но разные границы непрозрачной области:
 
-| Bottle              | Alpha bounds: left, top, right, bottom | Visible height |
-| ------------------- | -------------------------------------- | -------------- |
-| Colombard Sauvignon | 4, 7, 199, 729                         | 722px          |
-| Malbec              | 19, 53, 186, 698                       | 645px          |
-| Rosé                | 15, 17, 208, 736                       | 719px          |
+| Бутылка             | Слева, сверху, справа, снизу | Видимая высота |
+| ------------------- | ---------------------------- | -------------- |
+| Colombard Sauvignon | 4, 7, 199, 729               | 722 px         |
+| Malbec              | 19, 53, 186, 698             | 645 px         |
+| Rosé                | 15, 17, 208, 736             | 719 px         |
 
-`bottle()` in [app.js](app.js) derives each image's scale and offset from those bounds. The common CSS container represents the visible bottle, rather than the PNG canvas. Width follows the bottle's own aspect ratio; height and baseline remain fixed. This preserves the original exported files without raster editing. If an asset is replaced, its bounds must be measured again.
+Функция `bottle()` в [app.js](app.js) вычисляет масштаб и смещение по этим границам. CSS-контейнер соответствует видимой бутылке: пропорции сохраняются, высота и базовая линия совпадают. Исходные файлы не изменяются; при замене изображения границы нужно измерить повторно.
 
-### Partial hover / inconsistent interaction
+### Наведение и переключение
 
-The circle is a single semantic `<button>` with its own background, border radius and focus state. Its label and arrow have `pointer-events: none`; the decorative rail has no click handler. Carousel state changes synchronously, and animation never blocks input. CSS handles reduced motion.
+Круг выполнен одним семантическим `<button>` с фоном, скруглением и видимым фокусом. Надпись и стрелка имеют `pointer-events: none`, соседняя линия не обрабатывает клики. Состояние меняется синхронно, анимация не блокирует ввод; учитывается reduced motion.
 
-## Stack and structure
+## Стек и структура
 
-Plain HTML, CSS and JavaScript modules. No runtime dependencies, framework, bundler, API or database is needed for this page.
+HTML, CSS и JavaScript-модули без зависимостей времени выполнения, сборщика, API и БД.
 
 ```text
-index.html              Semantic content and native dialog
-styles.css              Responsive layout, themes, interaction states
-app.js                  Carousel, calibrated images, local collection
-assets/                 Original Figma exports and self-hosted OFL fonts
-server.mjs              Loopback-only development server
-tests/landing.spec.js   Browser regression checks
-capture.mjs             Reproducible screenshots of the running page
+index.html              Семантика страницы и нативный диалог
+styles.css              Адаптация, темы и состояния элементов
+app.js                  Карусель, геометрия и локальная коллекция
+assets/                 Экспорты Figma и локальные шрифты
+server.mjs              Локальный сервер разработки
+tests/landing.spec.js   Браузерные регрессионные проверки
+capture.mjs             Снимки работающего интерфейса
 ```
 
-## Run locally
+## Локальный запуск
 
-Use Node **24.18.0** (see `.node-version`) and pnpm **11.7.0**.
+Node.js 24.18.0 и pnpm 11.7.0, как в файлах версий.
 
 ```sh
 pnpm install --frozen-lockfile
@@ -66,11 +66,9 @@ pnpm dev
 # http://127.0.0.1:4184
 ```
 
-There are no secrets, environment files or migrations. Optional `PORT` changes the local preview port. The development server exposes only the page and its assets, and listens on loopback.
+Секреты, файлы окружения и миграции не нужны. Переменная `PORT` меняет порт. Сервер слушает loopback и открывает только страницу с её ресурсами. Для статического размещения достаточно `index.html`, `styles.css`, `app.js` и `assets/`; пути относительные и работают на GitHub Pages.
 
-The website itself is static: deploy `index.html`, `styles.css`, `app.js` and `assets/` to any static host. All asset paths are relative, including on GitHub Pages.
-
-## Verification
+## Проверки
 
 ```sh
 pnpm check
@@ -80,25 +78,19 @@ pnpm test
 pnpm audit --audit-level=high
 ```
 
-The same nine behavioural checks run in Chromium, Firefox and WebKit. They cover geometry through a complete carousel cycle; circular hit targets and hover; rapid input and keyboard selection; collection arithmetic and persistence; invalid and unavailable storage; responsive overflow/collisions; menu/dialog focus; and local asset serving. CI fails on failed checks and publishes browser traces on failure. Automated widths are 320, 375, 390, 768, 1024 and 1440px.
+Девять сценариев выполняются в Chromium, Firefox и WebKit: полный цикл геометрии, круглая область нажатия, наведение, клавиатура, быстрый ввод, коллекция и сохранение, ошибки хранилища, переполнение, фокус меню/диалога и загрузка локальных ресурсов. Ширины: 320, 375, 390, 768, 1024 и 1440 px. CI падает при ошибке и сохраняет трассировки.
 
-To regenerate the real interface screenshots:
+Обновление снимков интерфейса: `pnpm capture`. Фактически выполненные проверки и окружение перечислены в [документации](docs/VERIFICATION.md).
 
-```sh
-pnpm capture
-```
+## Границы реализации
 
-See [verification notes](docs/VERIFICATION.md) for the checks actually run and their environment.
+Портфолио-интерфейс не является официальным сайтом производителя. Названия, изображения бутылок и исходные цены взяты из предоставленного макета; цены не являются актуальной офертой. Коллекция хранится на устройстве и не отправляет заказы, не принимает оплату и не бронирует дегустации. Ссылки производителя ведут на внешний сайт. Аккаунты, аналитика и отслеживающие cookie не используются.
 
-## Scope
+Первое вино и контент доступны без JavaScript; переключение и коллекция требуют JavaScript. Синхронизации устройств нет.
 
-This is an independent portfolio interface, not the producer's official website. Product names, bottle artwork and reference prices come from the supplied design; prices are not a current commercial offer. The collection is stored on the visitor's device; it does not submit an order, accept payment or reserve a tasting. Producer links leave the project for the external estate website. No account, analytics or tracking cookies are used.
+## Материалы
 
-The first wine and page content remain available without JavaScript; switching and the saved collection require JavaScript. Persisted collections do not sync between devices. No backend is justified for the present scope.
-
-## Assets and credits
-
-- Original composition and wine/photo assets: the [user-supplied Figma project](https://www.figma.com/design/jJ4Elc8tU9uAWlCB61WZYU/). Brand names and artwork remain the property of their respective owners; no additional licence to those assets is granted here.
-- Cormorant Garamond and Manrope: self-hosted from [Google Fonts](https://github.com/google/fonts), under the SIL Open Font License; licence texts are included in `assets/fonts/`.
-- Implementation and interface refinements: Roman Kabanov ([memorim](https://github.com/memorim)).
-- Estate background and current external destination: the [producer's website](https://www.les-freres-laffitte.com/). No dates or visit availability are claimed by this interface.
+- Композиция и изображения — [предоставленный макет Figma](https://www.figma.com/design/jJ4Elc8tU9uAWlCB61WZYU/). Права на бренды и изображения остаются у их правообладателей; дополнительная лицензия на них здесь не предоставляется.
+- Cormorant Garamond и Manrope размещены локально из [Google Fonts](https://github.com/google/fonts); тексты SIL Open Font License находятся в `assets/fonts/`.
+- Реализация и доработка интерфейса — Роман Кабанов ([memorim](https://github.com/memorim)).
+- Сведения об усадьбе и внешняя ссылка — [сайт производителя](https://www.les-freres-laffitte.com/). Актуальное расписание визитов интерфейс не подтверждает.

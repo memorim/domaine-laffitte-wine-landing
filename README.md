@@ -2,8 +2,6 @@
 
 Адаптивный лендинг по концепции Figma: три вина в одной карусели, согласованные размеры бутылок и круглая кнопка переключения.
 
-[Открыть проект](https://memorim.github.io/domaine-laffitte-wine-landing/)
-
 [Открыть сайт](https://memorim.github.io/domaine-laffitte-wine-landing/) · [Макет Figma](https://www.figma.com/design/jJ4Elc8tU9uAWlCB61WZYU/) · [Проверки CI](https://github.com/memorim/domaine-laffitte-wine-landing/actions)
 
 ![Компьютерная версия - белое вино](docs/desktop.png)
@@ -92,7 +90,7 @@ pnpm audit --audit-level=high
 
 ## Материалы
 
-- Композиция и изображения - [предоставленный макет Figma](https://www.figma.com/design/jJ4Elc8tU9uAWlCB61WZYU/). Права на бренды и изображения остаются у их правообладателей; дополнительная лицензия на них здесь не предоставляется.
+- Права на бренды и изображения остаются у их правообладателей; дополнительная лицензия на них здесь не предоставляется.
 - Cormorant Garamond и Manrope размещены локально из [Google Fonts](https://github.com/google/fonts); тексты SIL Open Font License находятся в `assets/fonts/`.
 - Реализация и доработка интерфейса - Роман Кабанов ([memorim](https://github.com/memorim)).
 - Сведения об усадьбе и внешняя ссылка - [сайт производителя](https://www.les-freres-laffitte.com/). Актуальное расписание визитов интерфейс не подтверждает.
